@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] float speed = 3;
     [SerializeField] float rotSpeed = 0.1f;
+    [SerializeField] Camera curCamera;
 
     private void Awake()
     {
@@ -36,11 +37,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce(new Vector3(movement.x, 0, movement.y) * speed);
+        Vector3 forward = curCamera.transform.forward;
+        Vector3 right = curCamera.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward = forward.normalized;
+        right = right.normalized;
+
+        Vector3 force = (forward * movement.y) + (right * movement.x);
+
+        rb.AddForce(force * speed);
 
         if (movement != new Vector2(0, 0))
         {
-            float angle = Mathf.Atan2(movement.y, -movement.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(force.z, -force.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle - 90, 0), rotSpeed);
         }
     }
