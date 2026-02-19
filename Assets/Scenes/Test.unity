@@ -227,7 +227,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.6015, y: 0, z: -0.74358}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -363,7 +363,7 @@ Transform:
   m_GameObject: {fileID: 1569306426}
   serializedVersion: 2
   m_LocalRotation: {x: 0.27059805, y: 0.6532815, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: -9.38, y: 5.52, z: -0.7400006}
+  m_LocalPosition: {x: -34.9, y: 22.48, z: -0.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -622,9 +622,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e480b3e5a672ca4db102cfe46a2525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 50
-  rotSpeed: 0.1
   curCamera: {fileID: 1569306429}
+  minSpeed: 70
+  maxSpeed: 140
+  noughtToMax: 2000
+  rotSpeed: 0.1
 --- !u!54 &2071813066
 Rigidbody:
   m_ObjectHideFlags: 0
