@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         //Calculates time difference since movement input started
         long difference = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - startTime; 
 
-        //Calculates speed multiplier based of difference
+        //Calculates speed multiplier based off difference
         float speedMultiplier = 1;
         if (difference < noughtToMax)
         {
