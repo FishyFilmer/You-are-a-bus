@@ -625,7 +625,11 @@ MonoBehaviour:
   curCamera: {fileID: 1569306429}
   minSpeed: 70
   maxSpeed: 140
-  noughtToMax: 2000
+  minToMax: 2000
+  maxBoostMultiplier: 2
+  maxBoostTime: 5000
+  boostRefillTime: 3000
+  activateBoostAmount: 0.05
   rotSpeed: 0.1
 --- !u!54 &2071813066
 Rigidbody:
