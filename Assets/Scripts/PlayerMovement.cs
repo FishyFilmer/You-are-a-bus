@@ -11,21 +11,31 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement; //Stores the players movement input
     Rigidbody rb; //Bus' rigidbody for physics
 
-    [SerializeField] Camera curCamera; //The current camera
-
     long movementStartTime; //Used to store when the player starts movement input
+
+    [Header("Movement")]
+    [Tooltip("Minimum speed for the bus")]
     [SerializeField] float minSpeed = 70f; //Minimum speed for the bus
+    [Tooltip("Maximum speed for the bus")]
     [SerializeField] float maxSpeed = 140f; //Maximum speed for the bus
+    [Tooltip("Time in milliseconds to go from min to max speed")]
     [SerializeField] int minToMax = 2000; //Time in milliseconds to go from min to max speed
+    [Tooltip("How fast the bus rotates")]
+    [SerializeField] float rotSpeed = 0.1f; //How fast the bus rotates
 
     bool isBoosting = false;
     int boostTime; //Amount of boost time the player has in milliseconds
+
+    [Header("Boost")]
+    [Tooltip("Boost speed multiplier")]
     [SerializeField] float maxBoostMultiplier = 2f; //Boost speed multiplier
+    [Tooltip("Max boost time in milliseconds")]
     [SerializeField] int maxBoostTime = 10000; //Max boost time in milliseconds
+    [Tooltip("Time for boost to refill in milliseconds")]
     [SerializeField] int boostRefillTime = 5000; //Time for boost to refill in milliseconds
+    [Tooltip("Percentage of max boost the player needs to activate boost as a decimal")]
     [SerializeField] float activateBoostAmount = 0.05f; //Percentage of max boost the player needs to activate boost as a decimal
 
-    [SerializeField] float rotSpeed = 0.1f; //How fast the bus rotates
 
     private void Awake()
     {
@@ -105,8 +115,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Gets the forward and right vectors of the camera
-        Vector3 forward = curCamera.transform.forward;
-        Vector3 right = curCamera.transform.right;
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
         forward.y = 0;
         right.y = 0;
         forward = forward.normalized;
