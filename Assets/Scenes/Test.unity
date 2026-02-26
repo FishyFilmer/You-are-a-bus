@@ -295,7 +295,11 @@ MonoBehaviour:
   curCamera: {fileID: 1569306429}
   minSpeed: 50
   maxSpeed: 120
-  noughtToMax: 2000
+  minToMax: 2000
+  maxBoostMultiplier: 2
+  maxBoostTime: 10000
+  boostRefillTime: 5000
+  activateBoostAmount: 0.05
   rotSpeed: 0.1
 --- !u!54 &123162764
 Rigidbody:
@@ -634,6 +638,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0365fe9d9454654685c3d14e96b2004, type: 3}
+--- !u!1 &1526553339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1526553341}
+  - component: {fileID: 1526553340}
+  m_Layer: 0
+  m_Name: LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1526553340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526553339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dab6b1514b2913449774e56686e3ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
+  roomPrefabs:
+  - {fileID: 6909899763788373275, guid: ede458743087d3d489e48b37528995ce, type: 3}
+  - {fileID: 4788333300068239365, guid: 6a287f4847adb234b8f0b0b255f28d4d, type: 3}
+  - {fileID: 4992461655679459677, guid: e709df8a0321d6245b7e80638ab61116, type: 3}
+  - {fileID: 8277377129561971472, guid: 340d918c49de9fa4f9c93db6d5f208a4, type: 3}
+  - {fileID: 4575413406414036949, guid: 828bb54f3351ccd45b42d21d67af968e, type: 3}
+  numberOfRooms: 5
+  roomHeight: 7
+  startY: 0
+--- !u!4 &1526553341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526553339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.11952, y: 0.13545, z: 2.92343}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1569306426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,3 +1148,4 @@ SceneRoots:
   - {fileID: 1767212734}
   - {fileID: 1039526572}
   - {fileID: 799451051}
+  - {fileID: 1526553341}
