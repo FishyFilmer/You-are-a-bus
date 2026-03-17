@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AdaptivePerformance;
@@ -36,6 +37,18 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Percentage of max boost the player needs to activate boost as a decimal")]
     [SerializeField] float activateBoostAmount = 0.05f; //Percentage of max boost the player needs to activate boost as a decimal
 
+    [Header("Camera")]
+    [Tooltip("Players main camera")]
+    [SerializeField] Camera playerCamera;
+    [Tooltip("Only temp")]
+    [SerializeField] GameObject[] cameraPositions;
+    [Tooltip("How fast the camera rotates")]
+    [SerializeField] float cameraRotateSpeed = 0.5f;
+    [Tooltip("How fast the camera moves")]
+    [SerializeField] float cameraMoveSpeed = 0.5f;
+    int cameraPosPointer = 0;
+    bool changeCamera;
+
 
     private void Awake()
     {
@@ -58,11 +71,48 @@ public class PlayerMovement : MonoBehaviour
         input.Gameplay.Move.canceled += OnMovement; //Needed so that movement gets set to (0,0) and stops the bus moving
         input.Gameplay.Boost.started += OnStartBoost;
         input.Gameplay.Boost.canceled += OnStopBoost;
+        input.Gameplay.CameraLeft.started += OnCameraLeft;
+        input.Gameplay.CameraRight.started += OnCameraRight;
     }
 
     private void OnDisable()
     {
         input.Disable(); //Disables inputs
+    }
+
+    private void OnCameraLeft(InputAction.CallbackContext context)
+    {
+        //Minus
+        if (cameraPosPointer - 1 < 0)
+        {
+            cameraPosPointer = cameraPositions.Length - 1;
+        }
+        else
+        {
+            cameraPosPointer -= 1;
+        }
+
+        changeCamera = true;
+        //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
+        //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
+    }
+
+    private void OnCameraRight(InputAction.CallbackContext context)
+    {
+        //Plus
+        if (cameraPosPointer + 1 > cameraPositions.Length - 1)
+        {
+            cameraPosPointer = 0;
+        }
+        else
+        {
+            cameraPosPointer += 1;
+        }
+
+        changeCamera = true;
+
+        //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
+        //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
     }
 
     private void OnStartMovement(InputAction.CallbackContext context)
@@ -97,6 +147,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Rotates camera
+        if (changeCamera)
+        {
+            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, cameraPositions[cameraPosPointer].transform.position, cameraMoveSpeed * Time.deltaTime);
+            playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, cameraPositions[cameraPosPointer].transform.rotation, cameraMoveSpeed * Time.deltaTime);
+            
+            if (playerCamera.transform == cameraPositions[cameraPosPointer].transform)
+            {
+                changeCamera = false;
+            }
+        }
+        
+        
         //Calculates amount of boost time
         if (!isBoosting && boostTime < maxBoostTime)
         {
