@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
         //
         boostTime = maxBoostTime;
-        print(Time.fixedDeltaTime);
+        // print(Time.fixedDeltaTime);
     }
 
     private void OnEnable()
@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         if (boostTime > maxBoostTime * activateBoostAmount) 
         {
             isBoosting = true;
-            print("boost");
+            // print("boost");
         }
     }
 
@@ -141,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
         if (isBoosting)
         {
             isBoosting = false;
-            print("stop boost");
+            // print("stop boost");
         }
     }
 
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isBoosting && boostTime < maxBoostTime)
         {
             boostTime += (int)(Time.fixedDeltaTime * 1000 * (maxBoostTime / boostRefillTime));
-            print(boostTime);
+            // print(boostTime);
         }
         else if (isBoosting && boostTime > 0)
         {
@@ -172,9 +172,9 @@ public class PlayerMovement : MonoBehaviour
             if (boostTime <= 0)
             {
                 isBoosting = false;
-                print("ran out of boost");
+                // print("ran out of boost");
             }
-            print(boostTime);
+            // print(boostTime);
         }
 
         //Gets the forward and right vectors of the camera

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.AI.Navigation;
+using Unity.Mathematics;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -9,14 +11,20 @@ public class LevelGenerator : MonoBehaviour
     public List<GameObject> roomPrefabs = new List<GameObject>();
 
     [Header("Generation Settings")]
-    [Tooltip("How many rooms to stack vertically")]
+    [Tooltip("How many rooms in level")]
     public int numberOfRooms = 10;
 
-    [Tooltip("Height of each room")]
-    public float roomHeight = 10f;
+    [Header("NavMeshSurface")]
+    public NavMeshSurface surface;
 
-    [Tooltip("Y position where the bottom of the first room spawns")]
-    public float startY = 0f;
+    // [Tooltip("Height of each room")]
+    // public float roomHeight = 10f;
+
+    // [Tooltip("X position where the bottom of the first room spawns")]
+    private float startX = 0f;
+
+    private Vector3 spawnPosition;
+    private Quaternion spawnRotation;
 
     private List<GameObject> spawnedRooms = new List<GameObject>();
 
@@ -43,7 +51,8 @@ public class LevelGenerator : MonoBehaviour
         var shuffledPrefabs = roomPrefabs.ToList();
         shuffledPrefabs.Shuffle();
 
-        float currentY = startY;
+        float startX = 0f;
+        int j = 0;
 
         for (int i = 0; i < numberOfRooms; i++)
         {
@@ -51,13 +60,26 @@ public class LevelGenerator : MonoBehaviour
             int prefabIndex = i % shuffledPrefabs.Count;
             GameObject prefabToUse = shuffledPrefabs[prefabIndex];
 
-            Vector3 spawnPosition = new Vector3(0f, currentY, 0f);
+            // If statement ensures generated rooms dont extend past 5 in a row
+            if (i > 4)
+            {
+                spawnPosition = new Vector3(startX+(25f*j), -1.3f, 60f);
+                spawnRotation = Quaternion.Euler(0, 180, 0);
+                j++;
+            }
+            else
+            {
+                spawnPosition = new Vector3(startX+(25f*i), -1.3f, 0f);
+                spawnRotation = Quaternion.Euler(0, 0, 0);
+            }
 
-            GameObject newRoom = Instantiate(prefabToUse, spawnPosition, Quaternion.identity, transform);
+            GameObject newRoom = Instantiate(prefabToUse, spawnPosition, spawnRotation, transform);
             spawnedRooms.Add(newRoom);
 
-            currentY += roomHeight;
+            // currentX += roomHeight;
         }
+
+        surface.BuildNavMesh();
     }
 }
 

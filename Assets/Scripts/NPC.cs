@@ -9,11 +9,12 @@ public class NPC : MonoBehaviour
     private SphereCollider fearRadius;
     private BoxCollider bc;
     private bool closeToPlayer = false;
-    [SerializeField] private GameObject target; //Serialized variable for player object
+    private GameObject target;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        target = GameObject.Find("Player");
         fearRadius = target.GetComponent<SphereCollider>();
         bc = target.GetComponent<BoxCollider>();
     }

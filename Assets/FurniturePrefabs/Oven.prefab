@@ -69,6 +69,10 @@ PrefabInstance:
       value: Oven
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 02a71916840a9ef41b379e3259b7f61e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 02a71916840a9ef41b379e3259b7f61e, type: 3}
       propertyPath: m_TagString
       value: Furniture
       objectReference: {fileID: 0}
@@ -81,7 +85,7 @@ PrefabInstance:
       addedObject: {fileID: 2756530112486924990}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 02a71916840a9ef41b379e3259b7f61e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -71289168022703728}
+      addedObject: {fileID: -6826414170197584296}
   m_SourcePrefab: {fileID: 100100000, guid: 02a71916840a9ef41b379e3259b7f61e, type: 3}
 --- !u!1 &5104930462834472705 stripped
 GameObject:
@@ -109,7 +113,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.7830215, y: 4.0603347, z: 3.7731178}
   m_Center: {x: -0.004951477, y: 2.0352707, z: 0.00000023841858}
---- !u!114 &-71289168022703728
+--- !u!114 &-6826414170197584296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,6 +122,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5104930462834472705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0262a3eb128ad84091c85af680a4a79, type: 3}
+  m_Script: {fileID: 11500000, guid: a0634a76ffcd65943b028308bcb66828, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Furniture
+  m_EditorClassIdentifier: Assembly-CSharp::Breakable
+  intactPrefab: {fileID: 919132149155446097, guid: 02a71916840a9ef41b379e3259b7f61e, type: 3}
+  brokenPrefab: {fileID: 919132149155446097, guid: 02a71916840a9ef41b379e3259b7f61e, type: 3}
