@@ -231,7 +231,7 @@ MonoBehaviour:
   maxSpeed: 120
   minToMax: 2000
   rotSpeed: 0.1
-  maxBoostMultiplier: 2
+  maxBoostMultiplier: 100
   maxBoostTime: 10000
   boostRefillTime: 5000
   activateBoostAmount: 0.05

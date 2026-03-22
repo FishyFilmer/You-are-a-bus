@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Boost")]
     [Tooltip("Boost speed multiplier")]
-    [SerializeField] float maxBoostMultiplier = 2f; //Boost speed multiplier
+    [SerializeField] float maxBoostMultiplier = 100f; //Boost speed multiplier
     [Tooltip("Max boost time in milliseconds")]
     [SerializeField] int maxBoostTime = 10000; //Max boost time in milliseconds
     [Tooltip("Time for boost to refill in milliseconds")]
@@ -40,12 +40,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Camera")]
     [Tooltip("Players main camera")]
     [SerializeField] Camera playerCamera;
-    [Tooltip("Only temp")]
+    [Tooltip("Camera positions")]
     [SerializeField] GameObject[] cameraPositions;
     [Tooltip("How fast the camera rotates")]
-    [SerializeField] float cameraRotateSpeed = 0.5f;
+    [SerializeField] float cameraRotateSpeed = 3.0f;
     [Tooltip("How fast the camera moves")]
-    [SerializeField] float cameraMoveSpeed = 0.5f;
+    [SerializeField] float cameraMoveSpeed = 3.0f;
     int cameraPosPointer = 0;
     bool changeCamera;
 
@@ -83,16 +83,20 @@ public class PlayerMovement : MonoBehaviour
     private void OnCameraLeft(InputAction.CallbackContext context)
     {
         //Minus
-        if (cameraPosPointer - 1 < 0)
+        if (changeCamera == false)
         {
-            cameraPosPointer = cameraPositions.Length - 1;
-        }
-        else
-        {
-            cameraPosPointer -= 1;
-        }
+            if (cameraPosPointer - 1 < 0)
+            {
+                cameraPosPointer = cameraPositions.Length - 1;
+            }
+            else
+            {
+                cameraPosPointer -= 1;
+            }
 
-        changeCamera = true;
+            changeCamera = true;
+        }
+        
         //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
         //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
     }
@@ -100,16 +104,21 @@ public class PlayerMovement : MonoBehaviour
     private void OnCameraRight(InputAction.CallbackContext context)
     {
         //Plus
-        if (cameraPosPointer + 1 > cameraPositions.Length - 1)
+        if (changeCamera == false)
         {
-            cameraPosPointer = 0;
-        }
-        else
-        {
-            cameraPosPointer += 1;
-        }
+            if (cameraPosPointer + 1 > cameraPositions.Length - 1)
+            {
+                cameraPosPointer = 0;
+            }
+            else
+            {
+                cameraPosPointer += 1;
+            }
 
-        changeCamera = true;
+            changeCamera = true;
+        }
+        
+
 
         //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
         //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
@@ -150,11 +159,17 @@ public class PlayerMovement : MonoBehaviour
         //Rotates camera
         if (changeCamera)
         {
-            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, cameraPositions[cameraPosPointer].transform.position, cameraMoveSpeed * Time.deltaTime);
-            playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, cameraPositions[cameraPosPointer].transform.rotation, cameraMoveSpeed * Time.deltaTime);
-            
-            if (playerCamera.transform == cameraPositions[cameraPosPointer].transform)
+            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, cameraPositions[cameraPosPointer].transform.position, cameraMoveSpeed * Time.fixedDeltaTime);
+            playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, cameraPositions[cameraPosPointer].transform.rotation, cameraMoveSpeed * Time.fixedDeltaTime);
+
+            //playerCamera.transform.position = Vector3.MoveTowards(playerCamera.transform.position, cameraPositions[cameraPosPointer].transform.position, cameraMoveSpeed);
+            //playerCamera.transform.rotation = Quaternion.RotateTowards(playerCamera.transform.rotation, cameraPositions[cameraPosPointer].transform.rotation, cameraRotateSpeed);
+
+
+            if (Vector3.Distance(playerCamera.transform.position, cameraPositions[cameraPosPointer].transform.position) < 0.25f)
             {
+                playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
+                playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
                 changeCamera = false;
             }
         }
@@ -200,17 +215,30 @@ public class PlayerMovement : MonoBehaviour
 
         //Calculates speed 
         float speed = 0;
+        //if (isBoosting)
+        //{
+        //    speed = (minSpeed + (maxSpeed - minSpeed) * acceleration) * maxBoostMultiplier;
+        //}
+        //else
+        //{
+        //    speed = minSpeed + (maxSpeed - minSpeed) * acceleration;
+        //}
+
+        ////Applies the movement force
+        //rb.AddForce(direction * speed);
+
+
+
+        speed = minSpeed + (maxSpeed - minSpeed) * acceleration;
+
         if (isBoosting)
         {
-            speed = (minSpeed + (maxSpeed - minSpeed) * acceleration) * maxBoostMultiplier;
+            rb.AddForce(direction * speed + transform.forward * maxBoostMultiplier);
         }
         else
         {
-            speed = minSpeed + (maxSpeed - minSpeed) * acceleration;
+            rb.AddForce(direction * speed);
         }
-
-        //Applies the movement force
-        rb.AddForce(direction * speed);
 
         //Rotates the bus in the direction of movement
         if (movement != new Vector2(0, 0)) //Stops the bus from defaulting to a rotation when player input stops
