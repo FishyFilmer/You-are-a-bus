@@ -5,7 +5,11 @@ using UnityEngine;
 public class Breakable : MonoBehaviour
 {
     [SerializeField] GameObject intactPrefab;
-    [SerializeField] GameObject brokenPrefab;
+    [SerializeField] GameObject[] brokenPrefabs;
+
+    [Header("NPC Spawn Settings")]
+    [SerializeField] GameObject npcPrefab;
+    [SerializeField, Range(0f, 1f)] private float spawnChance = 0.5f; // 50% default
 
     BoxCollider bc;
     MeshCollider[] mc;
@@ -26,15 +30,19 @@ public class Breakable : MonoBehaviour
 
     private void Break()
     {
-        brokenPrefab.SetActive(true);
-        intactPrefab.SetActive(false);
+        // picks one at random
+        int index = Random.Range(0, brokenPrefabs.Length);
+        brokenPrefabs[index].SetActive(true);
 
+        intactPrefab.SetActive(false);
         bc.enabled = false;
-        // for (int i = 0; i < mc.Length - 1; i++)
-        // {
-        //     mc[i].
-        // }
-        
-        Destroy(gameObject, 5);
+
+        // spawns NPC with chance
+        if (npcPrefab != null && Random.value <= spawnChance)
+        {
+            Instantiate(npcPrefab, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject, 5); // destroys object
     }
 }

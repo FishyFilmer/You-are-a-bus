@@ -70,7 +70,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Breakable
   intactPrefab: {fileID: 6402995787496594340}
-  brokenPrefab: {fileID: 7419690512077195542}
+  brokenPrefabs:
+  - {fileID: 1469357478997585751}
+  - {fileID: 7419690512077195542}
+  npcPrefab: {fileID: 7350150199277776465, guid: f0365fe9d9454654685c3d14e96b2004, type: 3}
 --- !u!1001 &1775927910360404486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1170,6 +1173,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1469357478997585751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b99c0fe08f68f1449a871064caa49124, type: 3}
+  m_PrefabInstance: {fileID: 1775927910360404486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1983155361628308192 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 225400215010513126, guid: b99c0fe08f68f1449a871064caa49124, type: 3}
