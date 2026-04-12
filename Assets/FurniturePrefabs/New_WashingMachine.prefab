@@ -74,6 +74,9 @@ MonoBehaviour:
   - {fileID: 836482745713135297}
   - {fileID: 423771027454925481}
   npcPrefab: {fileID: 7350150199277776465, guid: f0365fe9d9454654685c3d14e96b2004, type: 3}
+  spawnChance: 0.5
+  breakAcceleration: 0.5
+  breakBoost: 1
 --- !u!1001 &529913416948954000
 PrefabInstance:
   m_ObjectHideFlags: 0

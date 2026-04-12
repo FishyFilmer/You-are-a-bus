@@ -11,6 +11,12 @@ public class Breakable : MonoBehaviour
     [SerializeField] GameObject npcPrefab;
     [SerializeField, Range(0f, 1f)] private float spawnChance = 0.5f; // 50% default
 
+    [Header("Break Settings")]
+    [Tooltip("The acceleration the player needs to be at to break the furniture.")]
+    [SerializeField, Range(0f, 1f)] float breakAcceleration = 0.5f;
+    [Tooltip("If the player needs to be boosting to break the furniture. Overrides the acceleration.")]
+    [SerializeField] bool breakBoost = false;
+
     BoxCollider bc;
     MeshCollider[] mc;
 
@@ -24,7 +30,13 @@ public class Breakable : MonoBehaviour
     {
         if (col.collider.tag == "Player")
         {
-            Break();
+            PlayerMovement playerMovement = col.gameObject.GetComponent<PlayerMovement>(); // Grabs player movement script
+
+            // Checks if the player is going fast enough or is boosting depend on the break settings 
+            if ((playerMovement.GetCurrentAcceleration() >= breakAcceleration && !breakBoost) || (breakBoost && playerMovement.GetIsBoosting()))
+            {
+                Break();
+            }
         }
     }
 

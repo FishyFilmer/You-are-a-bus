@@ -20,11 +20,12 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Maximum speed for the bus")]
     [SerializeField] float maxSpeed = 140f; //Maximum speed for the bus
     [Tooltip("Time in milliseconds to go from min to max speed")]
-    [SerializeField] int minToMax = 2000; //Time in milliseconds to go from min to max speed
+    [SerializeField] float minToMax = 2000f; //Time in milliseconds to go from min to max speed
     [Tooltip("How fast the bus rotates")]
     [SerializeField] float rotSpeed = 0.1f; //How fast the bus rotates
 
     bool isBoosting = false;
+    float currentAcceleration = 0f; //Used to pass speed to other scripts
     int boostTime; //Amount of boost time the player has in milliseconds
 
     [Header("Boost")]
@@ -240,12 +241,24 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(direction * speed);
         }
 
+        currentAcceleration = (direction * acceleration).magnitude;
+
         //Rotates the bus in the direction of movement
         if (movement != new Vector2(0, 0)) //Stops the bus from defaulting to a rotation when player input stops
         {
             float angle = Mathf.Atan2(direction.z, -direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle - 90, 0), rotSpeed);
         }
+    }
+
+    public bool GetIsBoosting()
+    {
+        return isBoosting;
+    }
+
+    public float GetCurrentAcceleration()
+    {
+        return currentAcceleration;
     }
 
 }
