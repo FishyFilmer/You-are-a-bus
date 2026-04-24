@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float cameraMoveSpeed = 3.0f;
     int cameraPosPointer = 0;
     bool changeCamera;
+    bool isBigRoomView = true;
+    GameObject[] bigRoomCamPos;
 
 
     private void Awake()
@@ -60,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
         //
         boostTime = maxBoostTime;
         // print(Time.fixedDeltaTime);
+
+        bigRoomCamPos = cameraPositions;
     }
 
     private void OnEnable()
@@ -259,6 +263,53 @@ public class PlayerMovement : MonoBehaviour
     public float GetCurrentAcceleration()
     {
         return currentAcceleration;
+    }
+
+    public void UpdateCamPositions(GameObject[] newCamPos)
+    {
+        if (isBigRoomView == true)
+        {
+            // Big room to small
+            isBigRoomView = false;
+            cameraPositions = newCamPos;
+        }
+        else
+        {
+            // Small room to big
+            isBigRoomView = true;
+            cameraPositions = bigRoomCamPos;
+        }
+
+        cameraPosPointer = 0;
+
+        for (int i =1;  i < cameraPositions.Length; i++)
+        {
+            if(playerCamera.transform.eulerAngles.y == 0 || playerCamera.transform.eulerAngles.y == 180) //y axis
+            {
+                //print(Math.Abs(playerCamera.transform.position.z - cameraPositions[i].transform.position.z));
+                //print(Math.Abs(playerCamera.transform.position.z - cameraPositions[cameraPosPointer].transform.position.z));
+                print(cameraPositions[i].transform.position.z);
+                print(cameraPositions[cameraPosPointer].transform.position.z);
+                if (Math.Abs(playerCamera.transform.position.z - cameraPositions[i].transform.position.z) <
+                    Math.Abs(playerCamera.transform.position.z - cameraPositions[cameraPosPointer].transform.position.z))
+                {
+                    cameraPosPointer = i;
+                }
+            }
+            else if (playerCamera.transform.eulerAngles.y == 90 || playerCamera.transform.eulerAngles.y == 270) //x axis
+            {
+                //print(Math.Abs(playerCamera.transform.position.x - cameraPositions[i].transform.position.x));
+                //print(Math.Abs(playerCamera.transform.position.x - cameraPositions[cameraPosPointer].transform.position.x));
+                print(cameraPositions[i].transform.position.x);
+                print(cameraPositions[cameraPosPointer].transform.position.x);
+                if (Math.Abs(playerCamera.transform.position.x - cameraPositions[i].transform.position.x) <
+                    Math.Abs(playerCamera.transform.position.x - cameraPositions[cameraPosPointer].transform.position.x))
+                {
+                    cameraPosPointer = i;
+                }
+            }
+        }
+        changeCamera = true;
     }
 
 }
