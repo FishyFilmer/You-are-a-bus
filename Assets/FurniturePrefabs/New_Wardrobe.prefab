@@ -53,6 +53,9 @@ MonoBehaviour:
   - {fileID: 8368174325589606175}
   - {fileID: 1652445963628308919}
   npcPrefab: {fileID: 7350150199277776465, guid: f0365fe9d9454654685c3d14e96b2004, type: 3}
+  spawnChance: 0.75
+  breakAcceleration: 0.3
+  breakBoost: 0
 --- !u!65 &4091280300463025952
 BoxCollider:
   m_ObjectHideFlags: 0
