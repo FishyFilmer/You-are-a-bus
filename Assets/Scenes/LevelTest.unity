@@ -494,7 +494,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
   roomPrefabs:
-  - {fileID: 1604544414119784201, guid: 2a9def6c987352b4bbfddd828dfb1e3e, type: 3}
+  - {fileID: 1604544414119784201, guid: 5502d03911df96d44b73f3c217c982dc, type: 3}
+  - {fileID: 1604544414119784201, guid: a804858c240c9dc4bbce5116f2f226f5, type: 3}
+  - {fileID: 1604544414119784201, guid: 98931c0aa16ccb047807d6f2cc803806, type: 3}
+  - {fileID: 1604544414119784201, guid: 8037ecd3e9d152547b6c161dd7674699, type: 3}
+  - {fileID: 1604544414119784201, guid: 4c82f6431727e7e46a3b1ab038edc79d, type: 3}
   numberOfRooms: 10
   surface: {fileID: 529073049}
 --- !u!4 &529073048
