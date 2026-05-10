@@ -3,7 +3,22 @@ guid: 64ce572cd02592f44b9754341de0dec6
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 024b76c30ade8c2459251709c16c19e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: 90ce4f993c6029d4abcc11d2154bc020, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 1d321249cc52cc542ba1178459f4cdcd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -30,11 +45,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-<<<<<<< HEAD
-    isReadable: 1
-=======
     isReadable: 0
->>>>>>> b90a6225fbc5936cea2dc2666a21f04136812e10
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -45,13 +56,8 @@ ModelImporter:
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
-<<<<<<< HEAD
-    importCameras: 0
-    importLights: 0
-=======
     importCameras: 1
     importLights: 1
->>>>>>> b90a6225fbc5936cea2dc2666a21f04136812e10
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0

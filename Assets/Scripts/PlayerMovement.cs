@@ -76,8 +76,8 @@ public class PlayerMovement : MonoBehaviour
         input.Gameplay.Move.canceled += OnMovement; //Needed so that movement gets set to (0,0) and stops the bus moving
         input.Gameplay.Boost.started += OnStartBoost;
         input.Gameplay.Boost.canceled += OnStopBoost;
-        input.Gameplay.CameraLeft.started += OnCameraLeft;
-        input.Gameplay.CameraRight.started += OnCameraRight;
+        // input.Gameplay.CameraLeft.started += OnCameraLeft;
+        // input.Gameplay.CameraRight.started += OnCameraRight;
     }
 
     private void OnDisable()
@@ -85,49 +85,49 @@ public class PlayerMovement : MonoBehaviour
         input.Disable(); //Disables inputs
     }
 
-    private void OnCameraLeft(InputAction.CallbackContext context)
-    {
-        //Minus
-        if (changeCamera == false)
-        {
-            if (cameraPosPointer - 1 < 0)
-            {
-                cameraPosPointer = cameraPositions.Length - 1;
-            }
-            else
-            {
-                cameraPosPointer -= 1;
-            }
+    // private void OnCameraLeft(InputAction.CallbackContext context)
+    // {
+    //     //Minus
+    //     if (changeCamera == false)
+    //     {
+    //         if (cameraPosPointer - 1 < 0)
+    //         {
+    //             cameraPosPointer = cameraPositions.Length - 1;
+    //         }
+    //         else
+    //         {
+    //             cameraPosPointer -= 1;
+    //         }
 
-            changeCamera = true;
-        }
+    //         changeCamera = true;
+    //     }
         
-        //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
-        //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
-    }
+    //     //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
+    //     //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
+    // }
 
-    private void OnCameraRight(InputAction.CallbackContext context)
-    {
-        //Plus
-        if (changeCamera == false)
-        {
-            if (cameraPosPointer + 1 > cameraPositions.Length - 1)
-            {
-                cameraPosPointer = 0;
-            }
-            else
-            {
-                cameraPosPointer += 1;
-            }
+    // private void OnCameraRight(InputAction.CallbackContext context)
+    // {
+    //     //Plus
+    //     if (changeCamera == false)
+    //     {
+    //         if (cameraPosPointer + 1 > cameraPositions.Length - 1)
+    //         {
+    //             cameraPosPointer = 0;
+    //         }
+    //         else
+    //         {
+    //             cameraPosPointer += 1;
+    //         }
 
-            changeCamera = true;
-        }
+    //         changeCamera = true;
+    //     }
         
 
 
-        //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
-        //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
-    }
+    //     //playerCamera.transform.rotation = cameraPositions[cameraPosPointer].transform.rotation;
+    //     //playerCamera.transform.position = cameraPositions[cameraPosPointer].transform.position;
+    // }
 
     private void OnStartMovement(InputAction.CallbackContext context)
     {

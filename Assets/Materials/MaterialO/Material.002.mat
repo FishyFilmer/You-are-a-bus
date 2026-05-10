@@ -35,6 +35,7 @@ Material:
     - _1st_ShadeColor_Step: 0.275
     - _BaseColor_Step: 0.275
     - _Glossiness: 0.5769231
+    - _Set_SystemShadowsToBase: 1
     - _Smoothness: 0.5769231
     m_Colors:
     - _1st_ShadeColor: {r: 0.45400003, g: 0.45400003, b: 0.45400003, a: 1}

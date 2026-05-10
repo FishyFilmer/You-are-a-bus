@@ -1,6 +1,4 @@
 ﻿<Solution>
-  <Project Path="UnityChan.Common.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
-  <Project Path="UnityChan.Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
 </Solution>

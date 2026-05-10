@@ -1,4 +1,5 @@
 using System.Net;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +11,9 @@ public class NPC : MonoBehaviour
     private BoxCollider bc;
     private bool closeToPlayer = false;
     private GameObject target;
+
+    public CapsuleCollider capsuleCollider;
+    public Animator animator;
 
     private void Awake()
     {
@@ -35,10 +39,14 @@ public class NPC : MonoBehaviour
         if (trigger == fearRadius) //Checks close proximity to player
         {
             closeToPlayer = true;
+            animator.SetBool("IsRunning", true);
         }
         if (trigger == bc) //Deletes object on collision with player
         {
-            Destroy(gameObject);
+            animator.SetBool("Caught", true);  
+            capsuleCollider.enabled = false;
+            closeToPlayer = false;
+            agent.enabled = false;
         }
     }
 
@@ -47,6 +55,7 @@ public class NPC : MonoBehaviour
         if (trigger == fearRadius) //Unchecks close proximity to player
         {
             closeToPlayer = false;
+            animator.SetBool("IsRunning", false);
         }
     }
 }
